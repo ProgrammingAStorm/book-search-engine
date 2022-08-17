@@ -50,6 +50,19 @@ const resolvers = {
             }
 
             throw new AuthenticationError('Not logged in');
+        },
+        removeBook: async (parent, args, context) => {
+            if (context.user) {
+                const userData = await User.findOneAndUpdate(
+                    { _id: context.user._id },
+                    { $pull: { savedBooks: { bookId: args.bookId } } },
+                    { new: true, runValidators: true }
+                );
+
+                return userData;
+            }
+
+            throw new AuthenticationError('Not logged in');
         }
     }
 };

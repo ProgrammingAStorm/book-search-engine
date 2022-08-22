@@ -1,5 +1,5 @@
 import React from 'react';
-import { Jumbotron, Container, CardColumns, Card, Button } from 'react-bootstrap';
+import { Jumbotron, Container, CardColumns, Card, Button, NavLink } from 'react-bootstrap';
 
 import { GET_ME } from '../utils/queries';
 import { REMOVE_BOOK } from '../utils/mutations';
@@ -38,7 +38,6 @@ const SavedBooks = () => {
   }
 
   const userData = data.me;
-  console.log(userData.savedBooks.length)
 
   return (
     <>
@@ -62,6 +61,12 @@ const SavedBooks = () => {
                   <Card.Title>{book.title}</Card.Title>
                   <p className='small'>Authors: {book.authors}</p>
                   <Card.Text>{book.description}</Card.Text>
+                  <NavLink
+                    href={`${book.link}`}
+                    target='_blankt'
+                  >
+                    Visit Page
+                  </NavLink>
                   <Button className='btn-block btn-danger' onClick={() => handleDeleteBook(book.bookId)}>
                     Delete this Book!
                   </Button>
